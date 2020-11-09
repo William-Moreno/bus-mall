@@ -2,3 +2,31 @@ body {
   width: 960px;
   background-color: aqua;
 }
+
+#results-frame,
+#voting-area {
+  float: left;
+  margin: 8px;
+  border: 1px solid red;
+}
+
+#resuls-frame {
+  width: 220px;
+  border: 1px solid black;
+}
+
+#voting-area {
+  width: 700px;
+  border: 1px solid black;
+}
+
+#image-area img {
+  float: left;
+  width: 212px;
+  margin: 9px;
+  border: 1px solid black;
+}
+
+#results-frame img {
+  width: 220px;
+}
