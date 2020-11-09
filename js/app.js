@@ -1,64 +1,72 @@
-'use strict';
+"use strict";
 
 var allProducts = [];
-var leftImageElement = document.getElementById('left-image');
-var centerImageElement = document.getElementById('center-image');
-var rightImageElement = document.getElementById('right-image');
+var leftImageElement = document.getElementById("left-image");
+var centerImageElement = document.getElementById("center-image");
+var rightImageElement = document.getElementById("right-image");
 var indexLeft;
 var indexCenter;
 var indexRight;
 
+function Product(fileName, title) {
+  this.filePath = `img/${fileName}`;
+  this.alt = title;
+  this.title = title;
+  this.votes = 0;
+  this.appearances = 0;
 
-function Product(fileName, title){
- this.filepath = `img/${fileName}`;
- this.alt = title;
- this.title = title;
- this.votes = 0;
- this.appearances = 0;
-
- allProducts.push(this);
-
+  allProducts.push(this);
 }
 
-new Product('bag.jpg', 'bag');
-new Product('banana.jpg', 'banana');
-new Product('bathroom.jpg', 'bathroom');
-new Product('boots.jpg', 'boots');
-new Product('breakfast.jpg', 'breakfast');
-new Product('bubblegum.jpg', 'bubblegum');
-new Product('chair.jpg', 'chair');
-new Product('cthulhu.jpg', 'cthulhu');
-new Product('dog-duck.jpg', 'dog-duck');
-new Product('dragon.jpg', 'dragon');
-new Product('pen.jpg', 'pen');
-new Product('pet-sweep.jpg', 'pet-sweep');
-new Product('scissors.jpg', 'scissors');
-new Product('shark.jpg', 'shark');
-new Product('sweep.png', 'sweep');
-new Product('tauntaun.jpg', 'tauntaun');
-new Product('unicorn.jpg', 'unicorn');
-new Product('usb.gif', 'usb');
-new Product('water-can.jpg', 'water-can');
-new Product('wine-glass.jpg', 'wine-glass');
+new Product("bag.jpg", "bag");
+new Product("banana.jpg", "banana");
+new Product("bathroom.jpg", "bathroom");
+new Product("boots.jpg", "boots");
+new Product("breakfast.jpg", "breakfast");
+new Product("bubblegum.jpg", "bubblegum");
+new Product("chair.jpg", "chair");
+new Product("cthulhu.jpg", "cthulhu");
+new Product("dog-duck.jpg", "dog-duck");
+new Product("dragon.jpg", "dragon");
+new Product("pen.jpg", "pen");
+new Product("pet-sweep.jpg", "pet-sweep");
+new Product("scissors.jpg", "scissors");
+new Product("shark.jpg", "shark");
+new Product("sweep.png", "sweep");
+new Product("tauntaun.jpg", "tauntaun");
+new Product("unicorn.jpg", "unicorn");
+new Product("usb.gif", "usb");
+new Product("water-can.jpg", "water-can");
+new Product("wine-glass.jpg", "wine-glass");
 
-console.log(allProducts);
+function renderImages() {
+  leftImageElement.src = allProducts[indexLeft].filePath;
+  leftImageElement.alt = allProducts[indexLeft].title;
+  leftImageElement.title = allProducts[indexLeft].title;
 
-function renderImages(){
+  centerImageElement.src = allProducts[indexCenter].filePath;
+  centerImageElement.alt = allProducts[indexCenter].title;
+  centerImageElement.title = allProducts[indexCenter].title;
 
+  rightImageElement.src = allProducts[indexRight].filePath;
+  rightImageElement.alt = allProducts[indexRight].title;
+  rightImageElement.title = allProducts[indexRight].title;
 }
 
-function generateRandomIndexes(){
- indexLeft = Math.floor(Math.random() * allProducts.length);
- indexCenter = Math.floor(Math.random() * allProducts.length);
- while(indexCenter === indexLeft){
+function generateRandomIndexes() {
+  indexLeft = Math.floor(Math.random() * allProducts.length);
   indexCenter = Math.floor(Math.random() * allProducts.length);
- }
- indexRight = Math.floor(Math.random() * allProducts.length);
- while(indexRight === indexLeft || indexRight === indexCenter){
+  while (indexCenter === indexLeft) {
+    indexCenter = Math.floor(Math.random() * allProducts.length);
+  }
   indexRight = Math.floor(Math.random() * allProducts.length);
- }
+  while (indexRight === indexLeft || indexRight === indexCenter) {
+    indexRight = Math.floor(Math.random() * allProducts.length);
+  }
 }
 
+generateRandomIndexes();
+renderImages();
 
 // var votingElement = document.getElementById('voting-area');
 // votingElement.addEventListener('click', recordVote);
