@@ -4,6 +4,9 @@ var allProducts = [];
 var leftImageElement = document.getElementById('left-image');
 var centerImageElement = document.getElementById('center-image');
 var rightImageElement = document.getElementById('right-image');
+var indexLeft;
+var indexCenter;
+var indexRight;
 
 
 function Product(fileName, title){
@@ -41,9 +44,21 @@ new Product('wine-glass.jpg', 'wine-glass');
 console.log(allProducts);
 
 function renderImages(){
- 
+
+}
+
+function generateRandomIndexes(){
+ indexLeft = Math.floor(Math.random() * allProducts.length);
+ indexCenter = Math.floor(Math.random() * allProducts.length);
+ while(indexCenter === indexLeft){
+  indexCenter = Math.floor(Math.random() * allProducts.length);
+ }
+ indexRight = Math.floor(Math.random() * allProducts.length);
+ while(indexRight === indexLeft || indexRight === indexCenter){
+  indexRight = Math.floor(Math.random() * allProducts.length);
+ }
 }
 
 
-var votingElement = document.getElementById('voting-area');
-votingElement.addEventListener('click', recordVote);
+// var votingElement = document.getElementById('voting-area');
+// votingElement.addEventListener('click', recordVote);
