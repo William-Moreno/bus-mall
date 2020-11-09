@@ -4,9 +4,9 @@ var allProducts = [];
 var leftImageElement = document.getElementById("left-image");
 var centerImageElement = document.getElementById("center-image");
 var rightImageElement = document.getElementById("right-image");
-var indexLeft;
-var indexCenter;
-var indexRight;
+var imageElements = [leftImageElement, centerImageElement, rightImageElement]
+var randomIndexes = [];
+var numberOfVotes = 0;
 
 function Product(fileName, title) {
   this.filePath = `img/${fileName}`;
@@ -42,32 +42,28 @@ new Product("wine-glass.jpg", "wine-glass");
 function renderImages() {
   generateRandomIndexes();
 
-  leftImageElement.src = allProducts[indexLeft].filePath;
-  leftImageElement.alt = allProducts[indexLeft].title;
-  leftImageElement.title = allProducts[indexLeft].title;
-  allProducts[indexLeft].appearances++;
-  
-  centerImageElement.src = allProducts[indexCenter].filePath;
-  centerImageElement.alt = allProducts[indexCenter].title;
-  centerImageElement.title = allProducts[indexCenter].title;
-  allProducts[indexCenter].appearances++;
-  
-  rightImageElement.src = allProducts[indexRight].filePath;
-  rightImageElement.alt = allProducts[indexRight].title;
-  rightImageElement.title = allProducts[indexRight].title;
-  allProducts[indexRight].appearances++;
+  for(var i = 0 ; i < randomIndexes.length ; i++){
+   imageElements[i].src = allProducts[randomIndexes[i]].filePath;
+   imageElements[i].alt = allProducts[randomIndexes[i]].title;
+   imageElements[i].title = allProducts[randomIndexes[i]].title;
+   allProducts[randomIndexes[i]].appearances++;
+
+  }
+
 }
 
 function generateRandomIndexes() {
-  indexLeft = Math.floor(Math.random() * allProducts.length);
-  indexCenter = Math.floor(Math.random() * allProducts.length);
+  randomIndexes = [];
+  var indexLeft = Math.floor(Math.random() * allProducts.length);
+  var indexCenter = Math.floor(Math.random() * allProducts.length);
   while (indexCenter === indexLeft) {
     indexCenter = Math.floor(Math.random() * allProducts.length);
   }
-  indexRight = Math.floor(Math.random() * allProducts.length);
+  var indexRight = Math.floor(Math.random() * allProducts.length);
   while (indexRight === indexLeft || indexRight === indexCenter) {
     indexRight = Math.floor(Math.random() * allProducts.length);
   }
+  randomIndexes.push(indexLeft, indexCenter, indexRight);
 }
 
 function recordVote(e){
