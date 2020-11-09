@@ -40,17 +40,22 @@ new Product("water-can.jpg", "water-can");
 new Product("wine-glass.jpg", "wine-glass");
 
 function renderImages() {
+  generateRandomIndexes();
+
   leftImageElement.src = allProducts[indexLeft].filePath;
   leftImageElement.alt = allProducts[indexLeft].title;
   leftImageElement.title = allProducts[indexLeft].title;
-
+  allProducts[indexLeft].appearances++;
+  
   centerImageElement.src = allProducts[indexCenter].filePath;
   centerImageElement.alt = allProducts[indexCenter].title;
   centerImageElement.title = allProducts[indexCenter].title;
-
+  allProducts[indexCenter].appearances++;
+  
   rightImageElement.src = allProducts[indexRight].filePath;
   rightImageElement.alt = allProducts[indexRight].title;
   rightImageElement.title = allProducts[indexRight].title;
+  allProducts[indexRight].appearances++;
 }
 
 function generateRandomIndexes() {
@@ -65,8 +70,19 @@ function generateRandomIndexes() {
   }
 }
 
-generateRandomIndexes();
+function recordVote(e){
+  var selectedImage = e.target.title;
+  for(var i = 0 ; i < allProducts.length ; i++) {
+   if(allProducts[i].title === selectedImage) {
+    allProducts[i].votes++;
+   }
+  }
+  renderImages();
+}
+
 renderImages();
 
-// var votingElement = document.getElementById('voting-area');
-// votingElement.addEventListener('click', recordVote);
+console.log(allProducts);
+
+var votingElement = document.getElementById('voting-area');
+votingElement.addEventListener('click', recordVote);
