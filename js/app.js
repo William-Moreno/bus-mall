@@ -67,14 +67,26 @@ function generateRandomIndexes() {
 }
 
 function recordVote(e){
-  var selectedImage = e.target.title;
-  for(var i = 0 ; i < allProducts.length ; i++) {
-   if(allProducts[i].title === selectedImage) {
-    allProducts[i].votes++;
-   }
+ var selectedImage = e.target.title;
+ for(var i = 0 ; i < allProducts.length ; i++) {
+  if(allProducts[i].title === selectedImage) {
+   allProducts[i].votes++;
   }
-  renderImages();
+ }
+ numberOfVotes++;
+ if(numberOfVotes === 25){
+  votingElement.removeEventListener('click', recordVote);
+ }
+ renderImages();
 }
+
+function displayResults(){
+ var resultsFrame = document.getElementById('results-frame');
+ var headerEl = document.createElement('h2');
+ headerEl.textContent = 'Results';
+ resultsFrame.appendChild(headerEl);
+}
+
 
 renderImages();
 
