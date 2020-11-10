@@ -10,13 +10,24 @@ var votingRounds = 0;
 var maxRounds = 25;
 
 function Product(fileName, title) {
-  this.filePath = `img/${fileName}`;
-  this.alt = title;
-  this.title = title;
-  this.votes = 0;
-  this.appearances = 0;
+ this.filePath = `img/${fileName}`;
+ this.alt = title;
+ this.title = title;
+ this.votes = 0;
+ this.appearances = 0;
+ this.percentage = 0;
+ 
+ allProducts.push(this);
+}
 
-  allProducts.push(this);
+Product.prototype.percentageChosen = function(){
+  var timesPicked = this.votes;
+  var timesShown = this.appearances;
+  if(timesShown === 0) {
+   this.percentage = 0;
+  } else {
+   this.percentage = Math.round(timesPicked / timesShown * 100);
+  }
 }
 
 new Product("bag.jpg", "bag");
@@ -78,6 +89,7 @@ function recordVote(e){
   votingRounds++;
   if(votingRounds === maxRounds){
    votingElement.removeEventListener('click', recordVote);
+   getPercentages();
    createResultButton();
   }
   renderImages();
@@ -113,10 +125,9 @@ function displayResults(){
    pluralShown = '';
   }
   resultEl = document.createElement('li');
-  resultEl.textContent = `${allProducts[i].title} had ${allProducts[i].votes} vote${pluralVotes}, and was seen ${allProducts[i].appearances} time${pluralShown}.`;
+  resultEl.textContent = `${allProducts[i].title} had ${allProducts[i].votes} vote${pluralVotes}, and was seen ${allProducts[i].appearances} time${pluralShown}. ${allProducts[i].percentage}%`;
   resultsList.appendChild(resultEl);
  }
- // resultsButton.removeEventListener('click', displayResults);
  document.getElementById('button-container').innerHTML = '';
 
  thankYouMessage();
@@ -128,6 +139,13 @@ function thankYouMessage(){
  var thanksMessage = document.createElement('h4');
  thanksMessage.textContent = 'Thank You For Participating!!';
  thankElement.appendChild(thanksMessage);
+}
+
+
+function getPercentages(){
+ for(var i = 0 ; i < allProducts.length ; i++){
+  allProducts[i].percentageChosen();
+ }
 }
 
 renderImages();
