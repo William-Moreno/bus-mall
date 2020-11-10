@@ -1,10 +1,12 @@
 body {
   width: 960px;
-  background-color: aqua;
+  background-image: url(../img/css-images/reflection.jpg);
+  background-repeat: no-repeat;
 }
 
 header {
   height: 80px;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 #logo-container {
@@ -37,18 +39,17 @@ nav a {
 #voting-area {
   float: left;
   margin: 8px;
-  border: 1px solid red;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
 }
 
-#resuls-frame {
+#results-frame {
   width: 220px;
-  border: 1px solid black;
 }
 
 #voting-area {
   text-align: center;
   width: 700px;
-  border: 1px solid black;
 }
 
 #voting-area h3 {
@@ -64,16 +65,19 @@ nav a {
   height: 220px;
   object-fit: contain;
   margin: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid black;
 }
 
 #results-header img {
   width: 220px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 #results-frame h2,
 ul {
-  width: 200px;
+  width: 180px;
 }
 
 #results-frame h2 {
@@ -99,7 +103,6 @@ ul {
 
 #button-container {
   clear: left;
-  border: 1px solid black;
   margin: 6px;
   width: 684px;
   height: 80px;
@@ -121,7 +124,20 @@ ul {
 #button-container h4 {
   font-family: "Yellowtail", cursive;
   text-align: center;
-  margin-top: 24px;
+  margin-top: 32px;
   font-size: 28px;
   padding: 2px;
+}
+
+#information {
+  margin: 6px 6px 20px 6px;
+  width: 684px;
+  text-align: left;
+  text-indent: 20px;
+}
+
+#footer-container {
+  clear: both;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.8);
 }
