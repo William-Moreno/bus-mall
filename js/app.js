@@ -6,7 +6,8 @@ var centerImageElement = document.getElementById("center-image");
 var rightImageElement = document.getElementById("right-image");
 var imageElements = [leftImageElement, centerImageElement, rightImageElement]
 var randomIndexes = [];
-var numberOfVotes = 0;
+var votingRounds = 0;
+var maxRounds = 25;
 
 function Product(fileName, title) {
   this.filePath = `img/${fileName}`;
@@ -67,19 +68,22 @@ function generateRandomIndexes() {
 }
 
 function recordVote(e){
- var selectedImage = e.target.title;
- for(var i = 0 ; i < allProducts.length ; i++) {
-  if(allProducts[i].title === selectedImage) {
-   allProducts[i].votes++;
+ if(e.target.id === 'left-image' || e.target.id === 'center-image' || e.target.id === 'right-image'){
+  var selectedImage = e.target.title;
+  for(var i = 0 ; i < allProducts.length ; i++) {
+   if(allProducts[i].title === selectedImage) {
+    allProducts[i].votes++;
+   }
   }
+  votingRounds++;
+  if(votingRounds === maxRounds){
+   votingElement.removeEventListener('click', recordVote);
+   createResultButton();
+  }
+  renderImages();
  }
- numberOfVotes++;
- if(numberOfVotes === 25){
-  votingElement.removeEventListener('click', recordVote);
-  createResultButton();
- }
- renderImages();
 }
+
 
 function createResultButton(){
  var buttonContainer = document.getElementById('button-container');
@@ -90,14 +94,15 @@ function createResultButton(){
 }
 
 function displayResults(){
- document.getElementById('results-frame').innerHTML = '';
- var resultsFrame = document.getElementById('results-frame');
+ document.getElementById('results-header').innerHTML = '';
+ var resultsHeader = document.getElementById('results-header');
  var headerEl = document.createElement('h2');
+ var resultsList = document.getElementById('results-list');
  var resultEl;
  var pluralVotes;
  var pluralShown;
  headerEl.textContent = 'Results';
- resultsFrame.appendChild(headerEl);
+ resultsHeader.appendChild(headerEl);
  for(var i = 0 ; i < allProducts.length ; i++){
   pluralVotes = 's';
   pluralShown = 's';
@@ -107,9 +112,9 @@ function displayResults(){
   if(allProducts[i].appearances === 1){
    pluralShown = '';
   }
-  resultEl = document.createElement('p');
+  resultEl = document.createElement('li');
   resultEl.textContent = `${allProducts[i].title} had ${allProducts[i].votes} vote${pluralVotes}, and was seen ${allProducts[i].appearances} time${pluralShown}.`;
-  resultsFrame.appendChild(resultEl);
+  resultsList.appendChild(resultEl);
  }
  // resultsButton.removeEventListener('click', displayResults);
  document.getElementById('button-container').innerHTML = '';
