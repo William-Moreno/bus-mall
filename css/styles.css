@@ -17,6 +17,7 @@ header {
 #top-header {
   float: left;
   margin-top: 24px;
+  font-family: "Yellowtail", cursive;
   font-size: 36px;
   font-weight: bold;
 }
@@ -41,6 +42,7 @@ nav a {
   margin: 8px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 12px;
+  box-shadow: 3px 3px 5px black;
 }
 
 #results-frame {
@@ -69,6 +71,13 @@ nav a {
   border: 1px solid black;
 }
 
+#logo-container img {
+  width: 150px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
 #results-header img {
   width: 220px;
   border-top-left-radius: 12px;
@@ -90,15 +99,18 @@ ul {
 
 #results-frame ul {
   padding: 10px;
-  font-size: 10px;
+  font-size: 12px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   line-height: 12px;
   list-style-type: initial;
   list-style-position: inside;
+  transform: translateX(6px);
 }
 
 #results-list li {
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
 }
 
 #button-container {
@@ -110,6 +122,7 @@ ul {
 }
 
 #button-container button {
+  background-image: linear-gradient(to right, red, yellow, red);
   width: 480px;
   margin-top: 20px;
   border-radius: 8px;
@@ -124,9 +137,9 @@ ul {
 #button-container h4 {
   font-family: "Yellowtail", cursive;
   text-align: center;
-  margin-top: 32px;
+  margin-top: 20px;
   font-size: 28px;
-  padding: 2px;
+  padding-top: 24px;
 }
 
 #information {
@@ -140,4 +153,7 @@ ul {
   clear: both;
   height: 60px;
   background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 18px;
+  line-height: 60px;
 }
