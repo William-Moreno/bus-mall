@@ -76,15 +76,33 @@ function recordVote(e){
  numberOfVotes++;
  if(numberOfVotes === 25){
   votingElement.removeEventListener('click', recordVote);
+  displayResults();
  }
  renderImages();
 }
 
 function displayResults(){
+ document.getElementById('results-frame').innerHTML = '';
  var resultsFrame = document.getElementById('results-frame');
  var headerEl = document.createElement('h2');
+ var resultEl;
+ var pluralVotes;
+ var pluralShown;
  headerEl.textContent = 'Results';
  resultsFrame.appendChild(headerEl);
+ for(var i = 0 ; i < allProducts.length ; i++){
+  pluralVotes = 's';
+  pluralShown = 's';
+  if(allProducts[i].votes === 1){
+   pluralVotes = '';
+  }
+  if(allProducts[i].appearances === 1){
+   pluralShown = '';
+  }
+  resultEl = document.createElement('p');
+  resultEl.textContent = `${allProducts[i].title} had ${allProducts[i].votes} vote${pluralVotes}, and was seen ${allProducts[i].appearances} time${pluralShown}.`;
+  resultsFrame.appendChild(resultEl);
+ }
 }
 
 
