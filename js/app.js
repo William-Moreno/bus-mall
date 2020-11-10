@@ -111,7 +111,8 @@ function displayResults(){
   resultEl.textContent = `${allProducts[i].title} had ${allProducts[i].votes} vote${pluralVotes}, and was seen ${allProducts[i].appearances} time${pluralShown}.`;
   resultsFrame.appendChild(resultEl);
  }
- resultButton.removeEventListener('click', displayResults);
+ // resultsButton.removeEventListener('click', displayResults);
+ document.getElementById('button-container').innerHTML = '';
 }
 
 
