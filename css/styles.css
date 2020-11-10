@@ -3,8 +3,21 @@ body {
   background-color: aqua;
 }
 
+header {
+  height: 80px;
+}
+
 nav a {
+  text-align: center;
   float: right;
+  width: 72px;
+  padding: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid black;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #results-frame,
@@ -64,7 +77,10 @@ ul {
 }
 
 #button-container {
-  width: 100%;
+  clear: left;
+  border: 1px solid black;
+  margin: 6px;
+  width: 684px;
   height: 80px;
   text-align: center;
 }
