@@ -118,8 +118,17 @@ function displayResults(){
  }
  // resultsButton.removeEventListener('click', displayResults);
  document.getElementById('button-container').innerHTML = '';
+
+ thankYouMessage();
+
 }
 
+function thankYouMessage(){
+ var thankElement = document.getElementById('button-container');
+ var thanksMessage = document.createElement('h4');
+ thanksMessage.textContent = 'Thank You For Participating!!';
+ thankElement.appendChild(thanksMessage);
+}
 
 renderImages();
 
