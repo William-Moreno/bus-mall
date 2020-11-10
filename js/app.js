@@ -55,7 +55,7 @@ new Product("wine-glass.jpg");
 function renderImages() {
   generateRandomIndexes();
 
-  for (var i = 0; i < randomIndexes.length; i++) {
+  for (var i = 0; i < 3; i++) {
     var currentIndex = randomIndexes[i];
     var currentElement = imageElements[i];
 
@@ -67,18 +67,25 @@ function renderImages() {
 }
 
 function generateRandomIndexes() {
-  randomIndexes = [];
-  var indexLeft = Math.floor(Math.random() * allProducts.length);
-  var indexCenter = Math.floor(Math.random() * allProducts.length);
 
-  while (indexCenter === indexLeft) {
-    indexCenter = Math.floor(Math.random() * allProducts.length);
-  }
-  var indexRight = Math.floor(Math.random() * allProducts.length);
-  while (indexRight === indexLeft || indexRight === indexCenter) {
-    indexRight = Math.floor(Math.random() * allProducts.length);
-  }
-  randomIndexes.push(indexLeft, indexCenter, indexRight);
+  for(var i = 0 ; i < 3 ; i++){
+
+		var generatedNumber = getRandomNumber();
+
+		while(randomIndexes.includes(generatedNumber)){
+		generatedNumber = getRandomNumber();
+		}
+
+		randomIndexes.unshift(generatedNumber);
+
+		while(randomIndexes.length > 6){
+		randomIndexes.pop();
+		}
+	}
+}
+
+function getRandomNumber(){
+	return Math.floor(Math.random() * allProducts.length);
 }
 
 function recordVote(e) {
@@ -160,6 +167,7 @@ function getPercentages() {
   }
 }
 
+generateRandomIndexes();
 renderImages();
 
 votingElement.addEventListener("click", recordVote);
