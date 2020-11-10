@@ -76,9 +76,17 @@ function recordVote(e){
  numberOfVotes++;
  if(numberOfVotes === 25){
   votingElement.removeEventListener('click', recordVote);
-  displayResults();
+  createResultButton();
  }
  renderImages();
+}
+
+function createResultButton(){
+ var buttonContainer = document.getElementById('button-container');
+ var resultsButton = document.createElement('button');
+ resultsButton.textContent = 'View Results';
+ buttonContainer.appendChild(resultsButton);
+ resultsButton.addEventListener('click', displayResults);
 }
 
 function displayResults(){
@@ -103,6 +111,7 @@ function displayResults(){
   resultEl.textContent = `${allProducts[i].title} had ${allProducts[i].votes} vote${pluralVotes}, and was seen ${allProducts[i].appearances} time${pluralShown}.`;
   resultsFrame.appendChild(resultEl);
  }
+ resultButton.removeEventListener('click', displayResults);
 }
 
 
