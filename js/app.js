@@ -9,6 +9,9 @@ var imageElements = [leftImageElement, centerImageElement, rightImageElement];
 var randomIndexes = [];
 var votingRounds = 0;
 var maxRounds = 25;
+var productLabels = [];
+var productVotes = [];
+var productShown = [];
 
 function Product(fileName) {
   this.filePath = `img/${fileName}`;
@@ -55,7 +58,7 @@ new Product("wine-glass.jpg");
 function renderImages() {
   generateRandomIndexes();
 
-  for (var i = 0; i < randomIndexes.length; i++) {
+  for (var i = 0; i < 3; i++) {
     var currentIndex = randomIndexes[i];
     var currentElement = imageElements[i];
 
@@ -67,18 +70,25 @@ function renderImages() {
 }
 
 function generateRandomIndexes() {
-  randomIndexes = [];
-  var indexLeft = Math.floor(Math.random() * allProducts.length);
-  var indexCenter = Math.floor(Math.random() * allProducts.length);
 
-  while (indexCenter === indexLeft) {
-    indexCenter = Math.floor(Math.random() * allProducts.length);
-  }
-  var indexRight = Math.floor(Math.random() * allProducts.length);
-  while (indexRight === indexLeft || indexRight === indexCenter) {
-    indexRight = Math.floor(Math.random() * allProducts.length);
-  }
-  randomIndexes.push(indexLeft, indexCenter, indexRight);
+  for(var i = 0 ; i < 3 ; i++){
+
+		var generatedNumber = getRandomNumber();
+
+		while(randomIndexes.includes(generatedNumber)){
+		generatedNumber = getRandomNumber();
+		}
+
+		randomIndexes.unshift(generatedNumber);
+
+		while(randomIndexes.length > 6){
+		randomIndexes.pop();
+		}
+	}
+}
+
+function getRandomNumber(){
+	return Math.floor(Math.random() * allProducts.length);
 }
 
 function recordVote(e) {
@@ -144,6 +154,133 @@ function displayResults() {
 
   document.getElementById("button-container").innerHTML = "";
   thankYouMessage();
+  generateChart();
+}
+
+function createProductLabels(){
+  for(var i = 0 ; i < allProducts.length ; i++){
+    productLabels.push(allProducts[i].title);
+  }
+}
+
+function createProductVotes(){
+  for(var i = 0 ; i < allProducts.length ; i++){
+    productVotes.push(allProducts[i].votes);
+  }
+}
+
+function createProductShown(){
+  for(var i = 0 ; i < allProducts.length ; i++){
+    productShown.push(allProducts[i].appearances);
+  }
+}
+
+function generateChart(){
+  createProductLabels();
+  createProductVotes();
+  createProductShown();
+
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: productLabels,
+          datasets: [{
+              label: 'Votes',
+              data: productVotes,
+              backgroundColor: [
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)', 'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)', 'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)', 'rgba(0, 204, 0, 0.4)',
+                  'rgba(0, 204, 0, 0.4)'
+              ],
+              borderColor: [
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)', 'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)', 'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)', 'rgba(0, 204, 0, 1)',
+                  'rgba(0, 204, 0, 1)'
+              ],
+              borderWidth: 1
+          }, {
+              label: 'Times Shown',
+              data: productShown,
+              backgroundColor: [
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)', 'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)', 'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)', 'rgba(107, 107, 71, 0.4)',
+                  'rgba(107, 107, 71, 0.4)'
+              ],
+              borderColor: [
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)', 'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)', 'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)', 'rgba(107, 107, 71, 1)',
+                  'rgba(107, 107, 71, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
 }
 
 function thankYouMessage() {
@@ -160,6 +297,8 @@ function getPercentages() {
   }
 }
 
+generateRandomIndexes();
 renderImages();
 
 votingElement.addEventListener("click", recordVote);
+
