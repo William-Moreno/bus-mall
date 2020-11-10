@@ -1,6 +1,7 @@
 "use strict";
 
 var allProducts = [];
+var votingElement = document.getElementById("voting-area");
 var leftImageElement = document.getElementById("left-image");
 var centerImageElement = document.getElementById("center-image");
 var rightImageElement = document.getElementById("right-image");
@@ -9,10 +10,9 @@ var randomIndexes = [];
 var votingRounds = 0;
 var maxRounds = 25;
 
-function Product(fileName, title) {
+function Product(fileName) {
   this.filePath = `img/${fileName}`;
-  this.alt = title;
-  this.title = title;
+  this.alt = this.title = fileName.slice(0,-4);
   this.votes = 0;
   this.appearances = 0;
   this.percentage = 0;
@@ -31,26 +31,26 @@ Product.prototype.percentageChosen = function () {
   }
 };
 
-new Product("bag.jpg", "bag");
-new Product("banana.jpg", "banana");
-new Product("bathroom.jpg", "bathroom");
-new Product("boots.jpg", "boots");
-new Product("breakfast.jpg", "breakfast");
-new Product("bubblegum.jpg", "bubblegum");
-new Product("chair.jpg", "chair");
-new Product("cthulhu.jpg", "cthulhu");
-new Product("dog-duck.jpg", "dog-duck");
-new Product("dragon.jpg", "dragon");
-new Product("pen.jpg", "pen");
-new Product("pet-sweep.jpg", "pet-sweep");
-new Product("scissors.jpg", "scissors");
-new Product("shark.jpg", "shark");
-new Product("sweep.png", "sweep");
-new Product("tauntaun.jpg", "tauntaun");
-new Product("unicorn.jpg", "unicorn");
-new Product("usb.gif", "usb");
-new Product("water-can.jpg", "water-can");
-new Product("wine-glass.jpg", "wine-glass");
+new Product("bag.jpg");
+new Product("banana.jpg");
+new Product("bathroom.jpg");
+new Product("boots.jpg");
+new Product("breakfast.jpg");
+new Product("bubblegum.jpg");
+new Product("chair.jpg");
+new Product("cthulhu.jpg");
+new Product("dog-duck.jpg");
+new Product("dragon.jpg");
+new Product("pen.jpg");
+new Product("pet-sweep.jpg");
+new Product("scissors.jpg");
+new Product("shark.jpg");
+new Product("sweep.png");
+new Product("tauntaun.jpg");
+new Product("unicorn.jpg");
+new Product("usb.gif");
+new Product("water-can.jpg");
+new Product("wine-glass.jpg");
 
 function renderImages() {
   generateRandomIndexes();
@@ -159,5 +159,4 @@ function getPercentages() {
 
 renderImages();
 
-var votingElement = document.getElementById("voting-area");
 votingElement.addEventListener("click", recordVote);
