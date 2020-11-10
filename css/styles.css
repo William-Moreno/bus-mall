@@ -1,0 +1,159 @@
+body {
+  width: 960px;
+  background-image: url(../img/css-images/reflection.jpg);
+  background-repeat: no-repeat;
+}
+
+header {
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+#logo-container {
+  float: left;
+  margin: 20px 10px 0 20px;
+}
+
+#top-header {
+  float: left;
+  margin-top: 24px;
+  font-family: "Yellowtail", cursive;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+nav a {
+  text-align: center;
+  float: right;
+  margin-top: 30px;
+  width: 72px;
+  padding: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid black;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#results-frame,
+#voting-area {
+  float: left;
+  margin: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 3px 3px 5px black;
+}
+
+#results-frame {
+  width: 220px;
+}
+
+#voting-area {
+  text-align: center;
+  width: 700px;
+}
+
+#voting-area h3 {
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin: 10px;
+}
+
+#image-area img {
+  float: left;
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+  margin: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+}
+
+#logo-container img {
+  width: 150px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+#results-header img {
+  width: 220px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+#results-frame h2,
+ul {
+  width: 180px;
+}
+
+#results-frame h2 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: left;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 4px;
+}
+
+#results-frame ul {
+  padding: 10px;
+  font-size: 12px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 12px;
+  list-style-type: initial;
+  list-style-position: inside;
+  transform: translateX(6px);
+}
+
+#results-list li {
+  margin-bottom: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+}
+
+#button-container {
+  clear: left;
+  margin: 6px;
+  width: 684px;
+  height: 80px;
+  text-align: center;
+}
+
+#button-container button {
+  background-image: linear-gradient(to right, red, yellow, red);
+  width: 480px;
+  margin-top: 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 2px;
+}
+
+#button-container button:hover {
+  cursor: pointer;
+}
+
+#button-container h4 {
+  font-family: "Yellowtail", cursive;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 28px;
+  padding-top: 24px;
+}
+
+#information {
+  margin: 6px 6px 20px 6px;
+  width: 684px;
+  text-align: left;
+  text-indent: 20px;
+}
+
+#footer-container {
+  clear: both;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 18px;
+  line-height: 60px;
+}
