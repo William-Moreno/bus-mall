@@ -56,10 +56,13 @@ function renderImages() {
   generateRandomIndexes();
 
   for (var i = 0; i < randomIndexes.length; i++) {
-    imageElements[i].src = allProducts[randomIndexes[i]].filePath;
-    imageElements[i].alt = allProducts[randomIndexes[i]].title;
-    imageElements[i].title = allProducts[randomIndexes[i]].title;
-    allProducts[randomIndexes[i]].appearances++;
+    var currentIndex = randomIndexes[i];
+    var currentElement = imageElements[i];
+
+    currentElement.src = allProducts[currentIndex].filePath;
+    currentElement.alt = allProducts[currentIndex].title;
+    currentElement.title = allProducts[currentIndex].title;
+    allProducts[currentIndex].appearances++;
   }
 }
 
