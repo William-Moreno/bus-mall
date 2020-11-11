@@ -13,12 +13,12 @@ var productLabels = [];
 var productVotes = [];
 var productShown = [];
 
-function Product(fileName) {
-  this.filePath = `img/${fileName}`;
-  this.alt = this.title = fileName.slice(0,-4);
-  this.votes = 0;
-  this.appearances = 0;
-  this.percentage = 0;
+function Product(filePath, votes = 0, appearances = 0, percentage = 0) {
+  this.filePath = filePath;
+  this.alt = this.title = filePath.slice(4,-4);
+  this.votes = votes;
+  this.appearances = appearances;
+  this.percentage = percentage;
 
   allProducts.push(this);
 }
@@ -34,26 +34,29 @@ Product.prototype.percentageChosen = function () {
   }
 };
 
-new Product('bag.jpg');
-new Product('banana.jpg');
-new Product('bathroom.jpg');
-new Product('boots.jpg');
-new Product('breakfast.jpg');
-new Product('bubblegum.jpg');
-new Product('chair.jpg');
-new Product('cthulhu.jpg');
-new Product('dog-duck.jpg');
-new Product('dragon.jpg');
-new Product('pen.jpg');
-new Product('pet-sweep.jpg');
-new Product('scissors.jpg');
-new Product('shark.jpg');
-new Product('sweep.png');
-new Product('tauntaun.jpg');
-new Product('unicorn.jpg');
-new Product('usb.gif');
-new Product('water-can.jpg');
-new Product('wine-glass.jpg');
+function populateInitialProductArray(){
+
+  new Product('img/bag.jpg');
+  new Product('img/banana.jpg');
+  new Product('img/bathroom.jpg');
+  new Product('img/boots.jpg');
+  new Product('img/breakfast.jpg');
+  new Product('img/bubblegum.jpg');
+  new Product('img/chair.jpg');
+  new Product('img/cthulhu.jpg');
+  new Product('img/dog-duck.jpg');
+  new Product('img/dragon.jpg');
+  new Product('img/pen.jpg');
+  new Product('img/pet-sweep.jpg');
+  new Product('img/scissors.jpg');
+  new Product('img/shark.jpg');
+  new Product('img/sweep.png');
+  new Product('img/tauntaun.jpg');
+  new Product('img/unicorn.jpg');
+  new Product('img/usb.gif');
+  new Product('img/water-can.jpg');
+  new Product('img/wine-glass.jpg');
+}
 
 function renderImages() {
   generateRandomIndexes();
@@ -155,6 +158,7 @@ function displayResults() {
   document.getElementById('button-container').innerHTML = '';
   thankYouMessage();
   generateChart();
+  storeProductInfo();
 }
 
 function createChartData(){
@@ -286,6 +290,34 @@ function getPercentages() {
   }
 }
 
+function firstVisit(){
+  if(localStorage.length === 0){
+    populateInitialProductArray();
+  } else {
+    retrieveProductInfo();
+  }
+}
+
+function storeProductInfo(){
+  var stringifiedProducts = JSON.stringify(allProducts);
+  localStorage.setItem('productinfo', stringifiedProducts);
+}
+
+function retrieveProductInfo(){
+  var storedProducts = localStorage.getItem('productinfo');
+  var parsedProducts = JSON.parse(storedProducts);
+
+  reconstituteProductArray(parsedProducts);
+}
+
+function reconstituteProductArray(parsedArray){
+  allProducts = [];
+  for(var i = 0 ; i < parsedArray.length ; i++){
+    new Product(parsedArray[i].filePath, parsedArray[i].votes, parsedArray[i].appearances, parsedArray[i].percentage);
+  }
+}
+
+firstVisit();
 generateRandomIndexes();
 renderImages();
 
