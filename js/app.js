@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
 var allProducts = [];
-var votingElement = document.getElementById("voting-area");
-var leftImageElement = document.getElementById("left-image");
-var centerImageElement = document.getElementById("center-image");
-var rightImageElement = document.getElementById("right-image");
+var votingElement = document.getElementById('voting-area');
+var leftImageElement = document.getElementById('left-image');
+var centerImageElement = document.getElementById('center-image');
+var rightImageElement = document.getElementById('right-image');
 var imageElements = [leftImageElement, centerImageElement, rightImageElement];
 var randomIndexes = [];
 var votingRounds = 0;
@@ -34,26 +34,26 @@ Product.prototype.percentageChosen = function () {
   }
 };
 
-new Product("bag.jpg");
-new Product("banana.jpg");
-new Product("bathroom.jpg");
-new Product("boots.jpg");
-new Product("breakfast.jpg");
-new Product("bubblegum.jpg");
-new Product("chair.jpg");
-new Product("cthulhu.jpg");
-new Product("dog-duck.jpg");
-new Product("dragon.jpg");
-new Product("pen.jpg");
-new Product("pet-sweep.jpg");
-new Product("scissors.jpg");
-new Product("shark.jpg");
-new Product("sweep.png");
-new Product("tauntaun.jpg");
-new Product("unicorn.jpg");
-new Product("usb.gif");
-new Product("water-can.jpg");
-new Product("wine-glass.jpg");
+new Product('bag.jpg');
+new Product('banana.jpg');
+new Product('bathroom.jpg');
+new Product('boots.jpg');
+new Product('breakfast.jpg');
+new Product('bubblegum.jpg');
+new Product('chair.jpg');
+new Product('cthulhu.jpg');
+new Product('dog-duck.jpg');
+new Product('dragon.jpg');
+new Product('pen.jpg');
+new Product('pet-sweep.jpg');
+new Product('scissors.jpg');
+new Product('shark.jpg');
+new Product('sweep.png');
+new Product('tauntaun.jpg');
+new Product('unicorn.jpg');
+new Product('usb.gif');
+new Product('water-can.jpg');
+new Product('wine-glass.jpg');
 
 function renderImages() {
   generateRandomIndexes();
@@ -93,9 +93,9 @@ function getRandomNumber(){
 
 function recordVote(e) {
   if (
-    e.target.id === "left-image" ||
-    e.target.id === "center-image" ||
-    e.target.id === "right-image"
+    e.target.id === 'left-image' ||
+    e.target.id === 'center-image' ||
+    e.target.id === 'right-image'
   ) {
     var selectedImage = e.target.title;
     for (var i = 0; i < allProducts.length; i++) {
@@ -105,7 +105,7 @@ function recordVote(e) {
     }
     votingRounds++;
     if (votingRounds === maxRounds) {
-      votingElement.removeEventListener("click", recordVote);
+      votingElement.removeEventListener('click', recordVote);
       getPercentages();
       createResultButton();
     }
@@ -114,71 +114,60 @@ function recordVote(e) {
 }
 
 function createResultButton() {
-  var buttonContainer = document.getElementById("button-container");
-  var resultsButton = document.createElement("button");
+  var buttonContainer = document.getElementById('button-container');
+  var resultsButton = document.createElement('button');
 
-  resultsButton.textContent = "View Results";
+  resultsButton.textContent = 'View Results';
   buttonContainer.appendChild(resultsButton);
-  resultsButton.addEventListener("click", displayResults);
+  resultsButton.addEventListener('click', displayResults);
 }
 
 function displayResults() {
-  document.getElementById("results-header").innerHTML = "";
-  var resultsHeader = document.getElementById("results-header");
-  var headerEl = document.createElement("h2");
-  var resultsList = document.getElementById("results-list");
+  document.getElementById('results-header').innerHTML = '';
+  var resultsHeader = document.getElementById('results-header');
+  var headerEl = document.createElement('h2');
+  var resultsList = document.getElementById('results-list');
   var resultEl;
   var pluralVotes;
   var pluralShown;
 
-  headerEl.textContent = "Results";
+  headerEl.textContent = 'Results';
   resultsHeader.appendChild(headerEl);
 
   for (var i = 0; i < allProducts.length; i++) {
-    pluralVotes = "s";
-    pluralShown = "s";
+    pluralVotes = 's';
+    pluralShown = 's';
 
     if (allProducts[i].votes === 1) {
-      pluralVotes = "";
+      pluralVotes = '';
     }
 
     if (allProducts[i].appearances === 1) {
-      pluralShown = "";
+      pluralShown = '';
     }
 
-    resultEl = document.createElement("li");
+    resultEl = document.createElement('li');
     resultEl.textContent = `${allProducts[i].title} had ${allProducts[i].votes} vote${pluralVotes}, and was seen ${allProducts[i].appearances} time${pluralShown}. ${allProducts[i].percentage}%`;
     resultsList.appendChild(resultEl);
 
   }
 
-  document.getElementById("button-container").innerHTML = "";
+  document.getElementById('button-container').innerHTML = '';
   thankYouMessage();
   generateChart();
 }
 
-function createProductLabels(){
+function createChartData(){
   for(var i = 0 ; i < allProducts.length ; i++){
     productLabels.push(allProducts[i].title);
-  }
-}
-
-function createProductVotes(){
-  for(var i = 0 ; i < allProducts.length ; i++){
     productVotes.push(allProducts[i].votes);
-  }
-}
-
-function createProductShown(){
-  for(var i = 0 ; i < allProducts.length ; i++){
     productShown.push(allProducts[i].appearances);
   }
 }
 
+
 function generateChart(){
-  createProductLabels();
-  createProductVotes();
-  createProductShown();
+  createChartData();
 
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
@@ -284,10 +273,10 @@ function generateChart(){
 }
 
 function thankYouMessage() {
-  var thankElement = document.getElementById("button-container");
-  var thanksMessage = document.createElement("h4");
+  var thankElement = document.getElementById('button-container');
+  var thanksMessage = document.createElement('h4');
   
-  thanksMessage.textContent = "Thank You For Participating!!";
+  thanksMessage.textContent = 'Thank You For Participating!!';
   thankElement.appendChild(thanksMessage);
 }
 
@@ -300,5 +289,5 @@ function getPercentages() {
 generateRandomIndexes();
 renderImages();
 
-votingElement.addEventListener("click", recordVote);
+votingElement.addEventListener('click', recordVote);
 
