@@ -157,3 +157,7 @@ ul {
   font-size: 18px;
   line-height: 60px;
 }
+
+.chart-container {
+  display: none;
+}
