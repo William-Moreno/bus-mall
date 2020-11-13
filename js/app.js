@@ -157,8 +157,8 @@ function displayResults() {
 
   document.getElementById('button-container').innerHTML = '';
   thankYouMessage();
-  generateChart();
   blankImages();
+  generateChart();
   storeProductInfo();
 }
 
@@ -294,6 +294,8 @@ function getPercentages() {
 function blankImages(){
   document.getElementById('image-area').innerHTML = '';
   document.getElementById('prompt-vote').textContent = '';
+  var showChartArea = document.getElementById('information');
+  showChartArea.classList.remove('chart-container');
 }
 
 
