@@ -158,6 +158,7 @@ function displayResults() {
   document.getElementById('button-container').innerHTML = '';
   thankYouMessage();
   generateChart();
+  blankImages();
   storeProductInfo();
 }
 
@@ -289,6 +290,12 @@ function getPercentages() {
     allProducts[i].percentageChosen();
   }
 }
+
+function blankImages(){
+  document.getElementById('image-area').innerHTML = '';
+  document.getElementById('prompt-vote').textContent = '';
+}
+
 
 function firstVisit(){
   if(localStorage.length === 0){
