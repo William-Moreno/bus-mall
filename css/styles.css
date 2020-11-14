@@ -78,6 +78,8 @@ nav a {
   border-radius: 6px;
 }
 
+/* left results area styling */
+
 #results-header img {
   width: 220px;
   border-top-left-radius: 12px;
@@ -112,6 +114,8 @@ ul {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 3px;
 }
+
+/* button and thank you message container styling */
 
 #button-container {
   clear: left;
@@ -157,6 +161,8 @@ ul {
   font-size: 18px;
   line-height: 60px;
 }
+
+/* initally hide the chart area until voting has been completed */
 
 .chart-container {
   display: none;
