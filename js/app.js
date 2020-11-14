@@ -1,5 +1,7 @@
 'use strict';
 
+// global variables
+
 var allProducts = [];
 var votingElement = document.getElementById('voting-area');
 var leftImageElement = document.getElementById('left-image');
@@ -13,6 +15,8 @@ var productLabels = [];
 var productVotes = [];
 var productShown = [];
 
+// product constructor function
+
 function Product(filePath, votes = 0, appearances = 0, percentage = 0) {
   this.filePath = filePath;
   this.alt = this.title = filePath.slice(4,-4);
@@ -22,6 +26,8 @@ function Product(filePath, votes = 0, appearances = 0, percentage = 0) {
 
   allProducts.push(this);
 }
+
+// prototype function to determine percentage of times a shown product was voted for
 
 Product.prototype.percentageChosen = function () {
   var timesPicked = this.votes;
@@ -33,6 +39,8 @@ Product.prototype.percentageChosen = function () {
     this.percentage = Math.round((timesPicked / timesShown) * 100);
   }
 };
+
+// initial population of allProducts arrive with Object Instances
 
 function populateInitialProductArray(){
 
@@ -58,6 +66,8 @@ function populateInitialProductArray(){
   new Product('img/wine-glass.jpg');
 }
 
+// image rendering function
+
 function renderImages() {
   generateRandomIndexes();
 
@@ -71,6 +81,8 @@ function renderImages() {
     allProducts[currentIndex].appearances++;
   }
 }
+
+// generate random number for randomIndexes array
 
 function generateRandomIndexes() {
 
@@ -94,6 +106,8 @@ function getRandomNumber(){
 	return Math.floor(Math.random() * allProducts.length);
 }
 
+// voting function
+
 function recordVote(e) {
   if (
     e.target.id === 'left-image' ||
@@ -116,6 +130,8 @@ function recordVote(e) {
   }
 }
 
+// create button to display voting results
+
 function createResultButton() {
   var buttonContainer = document.getElementById('button-container');
   var resultsButton = document.createElement('button');
@@ -124,6 +140,8 @@ function createResultButton() {
   buttonContainer.appendChild(resultsButton);
   resultsButton.addEventListener('click', displayResults);
 }
+
+// voting results display
 
 function displayResults() {
   document.getElementById('results-header').innerHTML = '';
@@ -162,6 +180,8 @@ function displayResults() {
   storeProductInfo();
 }
 
+// generate data for chart
+
 function createChartData(){
   for(var i = 0 ; i < allProducts.length ; i++){
     productLabels.push(allProducts[i].title);
@@ -170,6 +190,7 @@ function createChartData(){
   }
 }
 
+// chart generator
 
 function generateChart(){
   createChartData();
@@ -277,6 +298,8 @@ function generateChart(){
   });
 }
 
+// end of vote functions
+
 function thankYouMessage() {
   var thankElement = document.getElementById('button-container');
   var thanksMessage = document.createElement('h4');
@@ -298,6 +321,7 @@ function blankImages(){
   showChartArea.classList.remove('chart-container');
 }
 
+// determine if this is the first visit
 
 function firstVisit(){
   if(localStorage.length === 0){
@@ -306,6 +330,8 @@ function firstVisit(){
     retrieveProductInfo();
   }
 }
+
+// local storage functions
 
 function storeProductInfo(){
   var stringifiedProducts = JSON.stringify(allProducts);
@@ -325,6 +351,8 @@ function reconstituteProductArray(parsedArray){
     new Product(parsedArray[i].filePath, parsedArray[i].votes, parsedArray[i].appearances, parsedArray[i].percentage);
   }
 }
+
+// function calls and establishment of event listener on intial page load
 
 firstVisit();
 generateRandomIndexes();
